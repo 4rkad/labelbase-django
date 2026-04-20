@@ -1,5 +1,9 @@
 FROM python:3.11
 
+LABEL org.opencontainers.image.source="https://github.com/4rkad/labelbase-django"
+LABEL org.opencontainers.image.description="Labelbase Django backend, 4rkad Umbrel fork"
+LABEL org.opencontainers.image.licenses="MIT"
+
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
