@@ -19,3 +19,7 @@ RUN apt-get update && \
 
 # Cleanup to reduce image size
 RUN apt-get purge -y --auto-remove build-essential
+
+# 4rkad fork: run as uid 1000 so bind-mounted volumes from Umbrel work
+RUN chown -R 1000:1000 /app
+USER 1000:1000

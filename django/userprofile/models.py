@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from labelbase.models import Labelbase
 
+import os as _os
+def _electrum_hostname_default():
+    return _os.environ.get("UMBREL_ELECTRUM_HOSTNAME") or "electrum.emzy.de"
+def _electrum_ports_default():
+    return _os.environ.get("UMBREL_ELECTRUM_PORTS") or "s50002"
+def _mempool_endpoint_default():
+    return _os.environ.get("UMBREL_MEMPOOL_ENDPOINT") or "https://mempool.space"
+
+
 
 CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),
@@ -18,13 +27,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mempool_endpoint = models.CharField(
         max_length=160,
-        default="https://mempool.space",
+        default=_mempool_endpoint_default,
         blank=True,
     )
 
     # electrum
-    electrum_hostname = models.CharField(max_length=255, default="electrum.emzy.de", blank=True)
-    electrum_ports = models.CharField(max_length=6, default="s50002", blank=True)
+    electrum_hostname = models.CharField(max_length=255, default=_electrum_hostname_default, blank=True)
+    electrum_ports = models.CharField(max_length=6, default=_electrum_ports_default, blank=True)
 
     # electrum testnet
     electrum_hostname_test = models.CharField(max_length=255, default="testnet.qtornado.com", blank=True)
