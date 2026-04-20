@@ -48,10 +48,15 @@ $(document).ready(function () {
     var passphraseFieldGroup = $('#id_passphrase').closest('.form-group');
 
     function togglePassphraseField() {
-      if (importTypeField.val() === 'samourai') {
+      var t = importTypeField.val();
+      if (t === 'samourai') {
         passphraseFieldGroup.show();
         $('#id_passphrase').prop('disabled', false);
         $('#samourai-warning').show();
+      } else if (t === 'BIP-0329-7z-enc') {
+        passphraseFieldGroup.show();
+        $('#id_passphrase').prop('disabled', false);
+        $('#samourai-warning').hide();
       } else {
         passphraseFieldGroup.hide();
         $('#id_passphrase').prop('disabled', true);
