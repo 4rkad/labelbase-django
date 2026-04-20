@@ -49,7 +49,7 @@ class Profile(models.Model):
     use_hashtags = models.BooleanField(default=True)
     use_treemap = models.BooleanField(default=True)
     use_attachments = models.BooleanField(default=True)
-    use_sentry = models.BooleanField(default=True)
+    use_sentry = models.BooleanField(default=False)
     use_chatwoot = models.BooleanField(default=False)
     use_fiatfinances = models.BooleanField(default=True)
     update_utxo_on_login = models.BooleanField(default=True)

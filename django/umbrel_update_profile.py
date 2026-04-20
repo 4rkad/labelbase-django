@@ -28,3 +28,6 @@ if me:
         mempool_endpoint__in=MEMPOOL_STALE_ENDPOINTS
     ).update(mempool_endpoint=me)
     print(f"migrated {n} profiles to mempool {me}")
+
+n = Profile.objects.filter(use_sentry=True).update(use_sentry=False)
+print(f"disabled Sentry on {n} profiles (Umbrel privacy default)")
