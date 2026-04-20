@@ -87,40 +87,18 @@ class BitcoinAddressDatatableView(BaseDatatableView):
 
                 for i in range(int(self.request.GET.get('address_count', DEFAULT_DERIVE_ADDRESS_COUNT))):
                     idx = i + offset
-                    if derivation == 'm/44' and xpub.startswith("xpub"):
-                        # BIP 44 - Legacy Addresses (P2PKH)
-                        pub = key.derive(f"m/0/{idx}").key
+                    testnet = xpub[0] in ('t', 'u', 'v')
+                    net = NETWORKS["test"] if testnet else NETWORKS["main"]
+                    pub = key.derive(f"m/0/{idx}").key
+                    if derivation == 'm/44':
                         sc = script.p2pkh(pub)
-                        address = sc.address(NETWORKS["main"])
-                    elif derivation == 'm/49' and xpub.startswith("ypub"):
-                        # BIP 49 - SegWit Addresses (P2SH-P2WPKH)
-                        pub = key.derive(f"m/0/{idx}").key
-                        witness_script = script.p2wpkh(pub)
-                        sc = script.p2sh(witness_script)
-                        address = sc.address(NETWORKS["main"])
-                    elif derivation == 'm/84' and xpub.startswith("zpub"):
-                        # BIP 84 - Native SegWit Addresses (P2WPKH)
-                        pub = key.derive(f"m/0/{idx}").key
+                    elif derivation == 'm/49':
+                        sc = script.p2sh(script.p2wpkh(pub))
+                    elif derivation == 'm/84':
                         sc = script.p2wpkh(pub)
-                        address = sc.address(NETWORKS["main"])
-                    elif derivation == 'm/44' and xpub.startswith("tpub"):
-                        # BIP 44 - Legacy Addresses (P2PKH)
-                        pub = key.derive(f"m/0/{idx}").key
-                        sc = script.p2pkh(pub)
-                        address = sc.address(NETWORKS["test"])
-                    elif derivation == 'm/49' and xpub.startswith("upub"):
-                        # BIP 49 - SegWit Addresses (P2SH-P2WPKH)
-                        pub = key.derive(f"m/0/{idx}").key
-                        witness_script = script.p2wpkh(pub)
-                        sc = script.p2sh(witness_script)
-                        address = sc.address(NETWORKS["test"])
-                    elif derivation == 'm/84' and xpub.startswith("vpub"):
-                        # BIP 84 - Native SegWit Addresses (P2WPKH)
-                        pub = key.derive(f"m/0/{idx}").key
-                        sc = script.p2wpkh(pub)
-                        address = sc.address(NETWORKS["test"])
                     else:
                         continue
+                    address = sc.address(net)
 
                     addresses.append({
                         'index': idx,
