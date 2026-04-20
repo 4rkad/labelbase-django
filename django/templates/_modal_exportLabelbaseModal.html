@@ -54,8 +54,8 @@
     });
 
   // Enable/disable passphrase input based on the "Encrypt" checkbox
-  const encryptCheckbox = $("#id_encrypt_checkbox");
-  const passphraseInput = $("#id_passphrase");
+  const encryptCheckbox = $("#id_export_encrypt_checkbox");
+  const passphraseInput = $("#id_export_passphrase");
   const exportButton = $("#exportButton");
 
   const formGroup = encryptCheckbox.closest(".form-group");
@@ -63,17 +63,17 @@
   const obj_br2 = $("<br>");
 
   formGroup.before(obj_hr); // Add <hr> before the parent form-group of the encryptCheckbox
-  const passphraseLabel = $('label[for="id_passphrase"].control-label');
+  const passphraseLabel = $('label[for="id_export_passphrase"].control-label');
   passphraseLabel.before(obj_br2);
 
   // Create an array of all the checkboxes that should enable the Export button
   const checkboxesToMonitor = [
-    $("#id_tx_checkbox"),
-    $("#id_addr_checkbox"),
-    $("#id_pubkey_checkbox"),
-    $("#id_input_checkbox"),
-    $("#id_output_checkbox"),
-    $("#id_xpub_checkbox"),
+    $("#id_export_tx_checkbox"),
+    $("#id_export_addr_checkbox"),
+    $("#id_export_pubkey_checkbox"),
+    $("#id_export_input_checkbox"),
+    $("#id_export_output_checkbox"),
+    $("#id_export_xpub_checkbox"),
   ];
 
   // Add change event handlers for all checkboxes

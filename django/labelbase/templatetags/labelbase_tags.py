@@ -25,7 +25,9 @@ def labelbaseform_edit(instance):
 
 @register.simple_tag
 def labelbaseform_export():
-    return ExportLabelsForm()
+    form = ExportLabelsForm()
+    form.auto_id = 'id_export_%s'
+    return form
 
 
 @register.tag(name="switch")
