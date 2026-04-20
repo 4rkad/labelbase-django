@@ -72,12 +72,12 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 .sidebar .nav-link {
 font-weight: 400;
 font-size: 1rem;
-color: #333;
+color: var(--bs-body-color);
 }
 
 .sidebar .nav-link .feather {
 margin-right: 4px;
-color: #727272;
+color: var(--bs-secondary-color);
 }
 
 .sidebar .nav-link.active {
@@ -254,12 +254,12 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
     .profile .nav-link {
       font-weight: 400;
       font-size: 1rem;
-      color: #333;
+      color: var(--bs-body-color);
     }
 
     .profile .nav-link .feather {
       margin-right: 4px;
-      color: #727272;
+      color: var(--bs-secondary-color);
     }
 
     .profile .nav-link.active {
@@ -274,7 +274,7 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
     .termslink {
       font-weight: 400;
       font-size: .75rem;
-      color: #333;
+      color: var(--bs-secondary-color);
       text-decoration:none;
     }
 
